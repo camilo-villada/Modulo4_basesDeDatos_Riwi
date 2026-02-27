@@ -1,0 +1,16 @@
+{
+  "name": "crud_db_estudiante",
+  "version": "1.0.0",
+  "description": "Proyecto simple para practicar Node, Express, MySQL y MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "mongoose": "^8.23.0",
+    "mysql2": "^3.18.2"
+  }
+}

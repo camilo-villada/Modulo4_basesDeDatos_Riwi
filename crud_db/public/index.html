@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Simple Dinamico</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>CRUD Dinamico (Tienda Electronica)</h1>
+    <p>Una sola pagina para Clientes, Productos y Pedidos.</p>
+
+    <section class="panel">
+      <label for="entidad">Selecciona una tabla:</label>
+      <select id="entidad">
+        <option value="clientes">Clientes</option>
+        <option value="productos">Productos</option>
+        <option value="pedidos">Pedidos</option>
+      </select>
+
+      <h2 id="titulo-formulario">Formulario</h2>
+
+      <form id="form-dinamico">
+        <div id="campos-dinamicos"></div>
+
+        <div class="botones">
+          <button type="button" id="btn-crear">Crear</button>
+          <button type="button" id="btn-actualizar">Actualizar</button>
+          <button type="button" id="btn-eliminar">Eliminar</button>
+          <button type="button" id="btn-listar">Listar</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Resultado</h2>
+      <table id="tabla-datos">
+        <thead id="tabla-head"></thead>
+        <tbody id="tabla-body"></tbody>
+      </table>
+    </section>
+
+    <p id="mensaje"></p>
+
+    <script src="script.js"></script>
+  </body>
+</html>
