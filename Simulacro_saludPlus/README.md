@@ -1,7 +1,7 @@
 # Simulacro Arquitectura Backend Híbrida - SaludPlus
 
 API REST con arquitectura híbrida:
-- MySQL para datos relacionales y consistencia (pacientes, médicos, seguros, citas).
+- MySQL para datos relacionales y consistencia (patients, doctors, insurances, appointments).
 - MongoDB para consulta rápida del historial completo de pacientes.
 
 Cumple los requisitos del simulacro:
@@ -152,6 +152,14 @@ Retorna el documento completo del paciente en `patient_histories`.
   - MongoDB: reemplazo lógico por `appointmentId` (remove + push).
 - Optimización SQL:
   - Índices en `appointments` para fecha, doctor y aseguradora.
+
+## Modelo relacional (3FN)
+
+Tablas implementadas en `sql/schema.sql`:
+- `patients` (`id`, `name`, `email`, `phone`, `address`)
+- `doctors` (`id`, `name`, `email`, `specialty`)
+- `insurances` (`id`, `name`, `coverage_percentage`)
+- `appointments` (`id`, `appointment_id`, `appointment_date`, `patient_id`, `doctor_id`, `insurance_id`, `treatment_code`, `treatment_description`, `treatment_cost`, `amount_paid`)
 
 ## Scripts disponibles
 

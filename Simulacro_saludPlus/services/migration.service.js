@@ -196,21 +196,6 @@ async function upsertPatientHistory(data) {
   );
 }
 
-async function upsertPatientHistoryWithRetry(data, attempts = 3) {
-  let lastError = null;
-
-  for (let i = 0; i < attempts; i += 1) {
-    try {
-      await upsertPatientHistory(data);
-      return;
-    } catch (error) {
-      lastError = error;
-    }
-  }
-
-  throw lastError;
-}
-
 function parseRow(rawRow) {
   const row = normalizeRow(rawRow);
 
@@ -269,11 +254,8 @@ async function processExcel(filePath) {
         continue;
       }
 
-      let transactionOpen = false;
-
       try {
         await connection.beginTransaction();
-        transactionOpen = true;
 
         const patientId = await upsertPatient(
           connection,
@@ -314,7 +296,7 @@ async function processExcel(filePath) {
           amountPaid: data.amountPaid,
         });
 
-        await upsertPatientHistoryWithRetry({
+        await upsertPatientHistory({
           patientEmail: data.patientEmail,
           patientName: data.patientName,
           appointmentId: data.appointmentId,
@@ -326,13 +308,10 @@ async function processExcel(filePath) {
         });
 
         await connection.commit();
-        transactionOpen = false;
 
         processedRows += 1;
       } catch (error) {
-        if (transactionOpen) {
-          await connection.rollback();
-        }
+        await connection.rollback().catch(() => {});
         skippedRows += 1;
         errors.push({ row: rowNumber, message: error.message });
       }
