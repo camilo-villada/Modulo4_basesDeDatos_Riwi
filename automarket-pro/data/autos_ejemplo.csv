@@ -1,0 +1,11 @@
+placa,marca,modelo,anio,color,kilometraje,tipo_combustible,transmision,numero_puertas
+PQR678,Honda,Civic,2023,Azul,15000,gasolina,automatica,4
+STU901,Ford,Fiesta,2021,Rojo,30000,gasolina,manual,4
+VWX234,Hyundai,Tucson,2022,Blanco,22000,gasolina,automatica,4
+YZA567,Kia,Sportage,2020,Gris,45000,gasolina,manual,4
+BCD890,BMW,Serie 3,2021,Negro,28000,gasolina,automatica,4
+EFG123,Volkswagen,Golf,2019,Plateado,55000,diesel,manual,4
+HIJ456,Audi,A4,2022,Blanco,12000,gasolina,automatica,4
+KLM789,Mercedes,Clase C,2023,Negro,5000,hibrido,automatica,4
+NOP012,Suzuki,Vitara,2020,Rojo,42000,gasolina,manual,4
+QRS345,Subaru,Forester,2021,Verde,33000,gasolina,automatica,4

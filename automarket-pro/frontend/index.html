@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoMarket Pro - Sistema de Compra y Venta de Autos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>AutoMarket Pro</h1>
+            <p>Sistema de Compra y Venta de Autos</p>
+        </div>
+    </header>
+
+    <!-- Navegación por tabs -->
+    <nav class="tabs">
+        <button class="tab-btn active" data-tab="autos">Inventario</button>
+        <button class="tab-btn" data-tab="personas">Personas</button>
+        <button class="tab-btn" data-tab="transacciones">Transacciones</button>
+        <button class="tab-btn" data-tab="rentabilidad">Rentabilidad</button>
+        <button class="tab-btn" data-tab="csv">Importar CSV</button>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container">
+
+        <!-- ============ TAB: INVENTARIO DE AUTOS ============ -->
+        <section id="tab-autos" class="tab-content active">
+            <div class="section-header">
+                <h2>Inventario de Vehículos</h2>
+                <button class="btn btn-primary" onclick="showAutoForm()">+ Nuevo Auto</button>
+            </div>
+
+            <!-- Formulario Auto -->
+            <div id="auto-form-container" class="form-container hidden">
+                <h3 id="auto-form-title">Registrar Nuevo Auto</h3>
+                <form id="auto-form" onsubmit="handleAutoSubmit(event)">
+                    <input type="hidden" id="auto-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="auto-placa">Placa *</label>
+                            <input type="text" id="auto-placa" placeholder="ABC123" required maxlength="10">
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-marca">Marca *</label>
+                            <input type="text" id="auto-marca" placeholder="Toyota" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-modelo">Modelo *</label>
+                            <input type="text" id="auto-modelo" placeholder="Corolla" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-anio">Año *</label>
+                            <input type="number" id="auto-anio" placeholder="2024" min="1900" max="2030" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-color">Color</label>
+                            <input type="text" id="auto-color" placeholder="Blanco">
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-kilometraje">Kilometraje</label>
+                            <input type="number" id="auto-kilometraje" placeholder="0" min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-combustible">Combustible</label>
+                            <select id="auto-combustible">
+                                <option value="gasolina">Gasolina</option>
+                                <option value="diesel">Diesel</option>
+                                <option value="electrico">Eléctrico</option>
+                                <option value="hibrido">Híbrido</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-transmision">Transmisión</label>
+                            <select id="auto-transmision">
+                                <option value="manual">Manual</option>
+                                <option value="automatica">Automática</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="auto-puertas">Puertas</label>
+                            <input type="number" id="auto-puertas" value="4" min="2" max="6">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideAutoForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tabla de autos -->
+            <div class="table-container">
+                <table id="autos-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Placa</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Año</th>
+                            <th>Color</th>
+                            <th>Km</th>
+                            <th>Combustible</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="autos-tbody">
+                        <tr><td colspan="10" class="loading">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ TAB: PERSONAS ============ -->
+        <section id="tab-personas" class="tab-content">
+            <div class="section-header">
+                <h2>Gestión de Personas</h2>
+                <button class="btn btn-primary" onclick="showPersonaForm()">+ Nueva Persona</button>
+            </div>
+
+            <!-- Formulario Persona -->
+            <div id="persona-form-container" class="form-container hidden">
+                <h3 id="persona-form-title">Registrar Nueva Persona</h3>
+                <form id="persona-form" onsubmit="handlePersonaSubmit(event)">
+                    <input type="hidden" id="persona-id">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="persona-documento">Documento *</label>
+                            <input type="text" id="persona-documento" placeholder="1001234567" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="persona-nombre">Nombre *</label>
+                            <input type="text" id="persona-nombre" placeholder="Carlos" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="persona-apellido">Apellido *</label>
+                            <input type="text" id="persona-apellido" placeholder="Gómez" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="persona-telefono">Teléfono</label>
+                            <input type="text" id="persona-telefono" placeholder="3101234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="persona-email">Email</label>
+                            <input type="email" id="persona-email" placeholder="correo@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="persona-direccion">Dirección</label>
+                            <input type="text" id="persona-direccion" placeholder="Calle 45 #12-30">
+                        </div>
+                        <div class="form-group">
+                            <label for="persona-ciudad">Ciudad</label>
+                            <input type="text" id="persona-ciudad" placeholder="Bogotá">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" onclick="hidePersonaForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="personas-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Documento</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Teléfono</th>
+                            <th>Email</th>
+                            <th>Ciudad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="personas-tbody">
+                        <tr><td colspan="8" class="loading">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ TAB: TRANSACCIONES ============ -->
+        <section id="tab-transacciones" class="tab-content">
+            <div class="section-header">
+                <h2>Registro de Transacciones</h2>
+                <button class="btn btn-primary" onclick="showTransaccionForm()">+ Nueva Transacción</button>
+            </div>
+
+            <!-- Formulario Transacción -->
+            <div id="transaccion-form-container" class="form-container hidden">
+                <h3>Registrar Transacción</h3>
+                <form id="transaccion-form" onsubmit="handleTransaccionSubmit(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="trans-tipo">Tipo *</label>
+                            <select id="trans-tipo" required>
+                                <option value="">Seleccione...</option>
+                                <option value="compra">Compra (empresa adquiere)</option>
+                                <option value="venta">Venta (empresa vende)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trans-auto">Auto *</label>
+                            <select id="trans-auto" required>
+                                <option value="">Seleccione un auto...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trans-persona">Persona *</label>
+                            <select id="trans-persona" required>
+                                <option value="">Seleccione una persona...</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="trans-precio">Precio ($) *</label>
+                            <input type="number" id="trans-precio" placeholder="50000000" min="1" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trans-fecha">Fecha *</label>
+                            <input type="date" id="trans-fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="trans-observaciones">Observaciones</label>
+                            <input type="text" id="trans-observaciones" placeholder="Notas adicionales">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <button type="button" class="btn btn-secondary" onclick="hideTransaccionForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="table-container">
+                <table id="transacciones-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tipo</th>
+                            <th>Auto</th>
+                            <th>Persona</th>
+                            <th>Precio</th>
+                            <th>Fecha</th>
+                            <th>Observaciones</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transacciones-tbody">
+                        <tr><td colspan="8" class="loading">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ TAB: RENTABILIDAD ============ -->
+        <section id="tab-rentabilidad" class="tab-content">
+            <div class="section-header">
+                <h2>Analisis de Rentabilidad</h2>
+                <button class="btn btn-primary" onclick="loadRentabilidad()">Actualizar</button>
+            </div>
+            <p class="info-text">Margen de ganancia calculado dinámicamente (3FN: no se almacena, se calcula por consulta).</p>
+            <div class="table-container">
+                <table id="rentabilidad-table">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Marca</th>
+                            <th>Modelo</th>
+                            <th>Precio Compra</th>
+                            <th>Precio Venta</th>
+                            <th>Ganancia</th>
+                            <th>% Ganancia</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rentabilidad-tbody">
+                        <tr><td colspan="7" class="loading">Cargando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ============ TAB: IMPORTAR CSV ============ -->
+        <section id="tab-csv" class="tab-content">
+            <div class="section-header">
+                <h2>Importacion Masiva de Vehiculos (CSV)</h2>
+            </div>
+
+            <div class="csv-info">
+                <h3>Instrucciones</h3>
+                <p>Suba un archivo <strong>.csv</strong> con las siguientes columnas (la primera fila debe ser el encabezado):</p>
+                <div class="csv-format">
+                    <code>placa,marca,modelo,anio,color,kilometraje,tipo_combustible,transmision,numero_puertas</code>
+                </div>
+                <p><strong>Campos obligatorios:</strong> placa, marca, modelo, anio</p>
+                <p><strong>Ejemplo:</strong></p>
+                <div class="csv-format">
+                    <code>placa,marca,modelo,anio,color,kilometraje,tipo_combustible,transmision,numero_puertas<br>
+XYZ789,Honda,Civic,2023,Azul,15000,gasolina,automatica,4<br>
+QWE456,Ford,Fiesta,2021,Rojo,30000,gasolina,manual,4</code>
+                </div>
+            </div>
+
+            <div class="csv-upload">
+                <form id="csv-form" onsubmit="handleCsvUpload(event)">
+                    <div class="file-input-wrapper">
+                        <label for="csv-file" class="file-label">
+                            <span id="file-name">Seleccionar archivo CSV...</span>
+                        </label>
+                        <input type="file" id="csv-file" accept=".csv" required onchange="updateFileName(this)">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg">Importar CSV</button>
+                </form>
+            </div>
+
+            <!-- Resultados de importación -->
+            <div id="csv-results" class="csv-results hidden">
+                <h3>Resultados de la Importación</h3>
+                <div id="csv-results-content"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast de notificaciones -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>AutoMarket Pro 2025 - Taller Full Stack</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
