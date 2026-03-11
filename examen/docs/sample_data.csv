@@ -1,0 +1,9 @@
+transaction_id,date,customer_name,customer_email,customer_address,customer_phone,product_category,product_sku,product_name,unit_price,quantity,total_line_value,supplier_name,supplier_email
+TXN-2001,2024-02-21,Andres Lopez,andres.lopez@gmail.com,Cra 45 #12-90 Medellin,3012223344,Accessories,MSE-LOG-502,Mouse Logitech M502,150000,3,450000,TechWorld SAS,ventas@techworld.com
+TXN-2001,2024-02-21,Andres Lopez,andres.lopez@gmail.com,Cra 45 #12-90 Medellin,3012223344,Home,CLK-WAL-05,Reloj de Pared,80000,1,80000,TechWorld SAS,ventas@techworld.com
+TXN-2002,2024-02-24,Natalia Vega,natalia.vega@mail.com,Cr 7 #45-12 Medellin,3059990011,Electronics,TBL-SAM-10,Tablet Samsung 10,1200000,1,1200000,Global Supplies Co,info@globalsupplies.com
+TXN-2002,2024-02-24,Natalia Vega,natalia.vega@mail.com,Cr 7 #45-12 Medellin,3059990011,Electronics,LPT-DEL-001,Laptop Dell Inspiron,3500000,1,3500000,Fogger SAS,info@foccertsas.com
+TXN-2002,2024-02-24,Natalia Vega,natalia.vega@mail.com,Cr 7 #45-12 Medellin,3059990011,Home,CLK-WAL-05,Reloj de Pared,80000,1,80000,TechWorld SAS,ventas@techworld.com
+TXN-2003,2024-02-18,Daniel Torres,daniel.torres@gmail.com,Calle 8 #14-77 Barranquilla,3034445566,Accessories,MSE-LOG-502,Mouse Logitech M502,150000,1,150000,TechWorld SAS,ventas@techworld.com
+TXN-2003,2024-02-18,Daniel Torres,daniel.torres@gmail.com,Calle 8 #14-77 Barranquilla,3034445566,Home,DSK-MDF-02,Escritorio MDF,350000,1,350000,HogarPro Ltda,contacto@hogarpro.com
+TXN-2003,2024-02-18,Daniel Torres,daniel.torres@gmail.com,Calle 8 #14-77 Barranquilla,3034445566,Electronics,PRN-HP-110,Impresora HP 110,600000,1,600000,AccesNet SAS,info@accesnet.com

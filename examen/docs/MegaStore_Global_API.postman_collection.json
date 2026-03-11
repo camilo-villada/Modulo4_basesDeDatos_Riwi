@@ -1,0 +1,118 @@
+{
+  "info": {
+    "name": "MegaStore Global API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Migration",
+      "item": [
+        {
+          "name": "Upload & Migrate Data",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [{ "key": "file", "type": "file", "src": "" }]
+            },
+            "url": { "raw": "http://localhost:3000/api/migration/upload", "host": ["http://localhost:3000"], "path": ["api", "migration", "upload"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Products CRUD",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/products", "host": ["http://localhost:3000"], "path": ["api", "products"] } }
+        },
+        {
+          "name": "Get Product by ID",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/products/1", "host": ["http://localhost:3000"], "path": ["api", "products", "1"] } }
+        },
+        {
+          "name": "Create Product",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"sku\": \"SKU-NEW\", \"name\": \"New Product\", \"price\": 29.99, \"id_category\": 1, \"id_supplier\": 1}" },
+            "url": { "raw": "http://localhost:3000/api/products", "host": ["http://localhost:3000"], "path": ["api", "products"] }
+          }
+        },
+        {
+          "name": "Update Product",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\"sku\": \"SKU-UPD\", \"name\": \"Updated Product\", \"price\": 39.99, \"id_category\": 1, \"id_supplier\": 1}" },
+            "url": { "raw": "http://localhost:3000/api/products/1", "host": ["http://localhost:3000"], "path": ["api", "products", "1"] }
+          }
+        },
+        {
+          "name": "Delete Product (+ Audit Log)",
+          "request": { "method": "DELETE", "url": { "raw": "http://localhost:3000/api/products/1", "host": ["http://localhost:3000"], "path": ["api", "products", "1"] } }
+        },
+        {
+          "name": "Get Categories",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/products/categories", "host": ["http://localhost:3000"], "path": ["api", "products", "categories"] } }
+        },
+        {
+          "name": "Get Suppliers",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/products/suppliers", "host": ["http://localhost:3000"], "path": ["api", "products", "suppliers"] } }
+        }
+      ]
+    },
+    {
+      "name": "BI Reports (SQL)",
+      "item": [
+        {
+          "name": "Supplier Analysis",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/supplier-analysis", "host": ["http://localhost:3000"], "path": ["api", "reports", "supplier-analysis"] } }
+        },
+        {
+          "name": "Customer Purchase History",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/customer-history/1", "host": ["http://localhost:3000"], "path": ["api", "reports", "customer-history", "1"] } }
+        },
+        {
+          "name": "Star Products by Category",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/star-products?category=Electronics", "host": ["http://localhost:3000"], "path": ["api", "reports", "star-products"], "query": [{ "key": "category", "value": "Electronics" }] } }
+        },
+        {
+          "name": "View: Supplier Inventory",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/supplier-inventory", "host": ["http://localhost:3000"], "path": ["api", "reports", "supplier-inventory"] } }
+        },
+        {
+          "name": "View: Product Sales",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/product-sales", "host": ["http://localhost:3000"], "path": ["api", "reports", "product-sales"] } }
+        },
+        {
+          "name": "View: Customer Spending",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/customer-spending", "host": ["http://localhost:3000"], "path": ["api", "reports", "customer-spending"] } }
+        },
+        {
+          "name": "Stored Procedure: Customer Summary",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/reports/customer-summary/1", "host": ["http://localhost:3000"], "path": ["api", "reports", "customer-summary", "1"] } }
+        }
+      ]
+    },
+    {
+      "name": "MongoDB Endpoints",
+      "item": [
+        {
+          "name": "Audit Logs",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/mongo/audit-logs", "host": ["http://localhost:3000"], "path": ["api", "mongo", "audit-logs"] } }
+        },
+        {
+          "name": "Customer History (MongoDB)",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/mongo/customer-history/andres.lopez@gmail.com", "host": ["http://localhost:3000"], "path": ["api", "mongo", "customer-history", "andres.lopez@gmail.com"] } }
+        },
+        {
+          "name": "Customer Aggregation (MongoDB)",
+          "request": { "method": "GET", "url": { "raw": "http://localhost:3000/api/mongo/customer-aggregation/andres.lopez@gmail.com", "host": ["http://localhost:3000"], "path": ["api", "mongo", "customer-aggregation", "andres.lopez@gmail.com"] } }
+        }
+      ]
+    }
+  ]
+}
